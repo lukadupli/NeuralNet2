@@ -110,6 +110,7 @@ namespace NNet {
 		istr >> a;
 		if (a < 0 || a >= 2) throw Exception("ConvL::Read: Invalid data given to read from stream!");
 		pad = static_cast<Padding>(a);
+        istr >> lrate;
 
 		CalcOutSizes();
 
@@ -126,7 +127,7 @@ namespace NNet {
 
 	std::ostream& ConvL::Write(std::ostream& ostr) const {
 		ostr << id << '\n';
-		ostr << in_d << ' ' << in_h << ' ' << in_w << '\n' << kernel_d << ' ' << kernel_w << ' ' << kernel_h << '\n' << pad << '\n';
+        ostr << in_d << ' ' << in_h << ' ' << in_w << '\n' << kernel_d << ' ' << kernel_w << ' ' << kernel_h << '\n' << pad << '\n' << lrate << '\n';
 
 		for (int i = 0; i < kernel_d; i++) ostr << kernels[i] << '\n';
 

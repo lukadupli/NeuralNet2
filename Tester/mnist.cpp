@@ -80,13 +80,10 @@ string FullPath(const string& str) {
     return LOCATION + str;
 }
 
-/*NeuralNet net
+NeuralNet net
 {
     28 * 28,
     {
-    new ConvL(0.01, 28, 28, 4, 5, 5, SAME),
-    new PoolL(28, 28, 4, 4, MaxPool, MaxPoolDeriv),
-    new ActL(0.02, ReLU, ReLUDeriv),
     new DenseL(0.01, 100),
     new ActL(0.02, Tanh, TanhDeriv),
     new DenseL(0.01, 10),
@@ -94,24 +91,6 @@ string FullPath(const string& str) {
     },
     CrossEntropyLoss,
     CrossEntropyLossDeriv
-};*/
-
-NeuralNet net{
-    28 * 28,
-    {
-        new ConvL(0.0001, 28, 28, 8, 3, 3, SAME),
-        new PoolL(28, 28, 2, 2, MaxPool, MaxPoolDeriv),
-        new ActL(0.02, ReLU, ReLUDeriv),
-        new ConvL(0.0001, 14, 14, 8, 3, 3, SAME),
-        new PoolL(14, 14, 2, 2, MaxPool, MaxPoolDeriv),
-        new ActL(0.02, ReLU, ReLUDeriv),
-        new DenseL(0.01, 100),
-        new ActL(0.02, Sigmoid, SigmoidDeriv),
-        new DenseL(0.01, 10),
-        new ActL(0.02, Softmax, SoftmaxDeriv),
-    },
-    CrossEntropyLoss,
-    CrossEntropyLossDeriv,
 };
 
 void Train(NeuralNet& net, const string& saveFile, const string& lossDump, const string& loadFile = "") {
@@ -202,9 +181,8 @@ void Test(NeuralNet& net) {
 }
 
 int main() {
-    //Train(net, "MNIST_MITdemo.txt", "MNIST_MITdemo.csv");
-    NeuralNet model{ FullPath("MNIST_MITdemo.txt") };
-    Test(model);
+    Train(net, "MNIST_MITdemo.txt", "MNIST_MITdemo.csv");
+    Test(net);
 
     return 0;
 }

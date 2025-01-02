@@ -60,7 +60,7 @@ namespace NNet {
 		return istr;
 	}
 	std::ostream& ActL::Write(std::ostream& ostr) const {
-		ostr << id << '\n' << in_sz << ' ' << lrate << ' ' << ActFunc << ' ' << ActDeriv << '\n' << bias << '\n';
+		ostr << id << '\n' << in_sz << ' ' << lrate << ' ' << ActFunc << ActDeriv << '\n' << bias << '\n';
 		return ostr;
 	}
 }
